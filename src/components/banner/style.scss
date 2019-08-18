@@ -1,5 +1,31 @@
 .banner{
-    img{
-        width: 100%;
-    }
+	position: relative;
+	img{
+		width: 100%;
+	}
+	&-content{
+		position: absolute;
+		width: 50%;
+		height: 50%;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		display: flex;
+		justify-content: center;
+		&__logo{
+			width: 148px;
+			height: 148px;
+			border: 2px solid #fff;
+			font-size: 31px;
+			line-height: 44px;
+			color: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: rgba(255,255,255,0.30);
+			box-shadow: -15px -15px rgba(255,255,255,0.28);
+		}
+	}
 }
