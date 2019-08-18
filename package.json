@@ -1,0 +1,48 @@
+{
+	"name": "booking_room",
+	"version": "1.0.0",
+	"description": "this project is based on react_init",
+	"main": "index.js",
+	"scripts": {
+		"dev": "webpack-dev-server --devtool eval --progress --colors --content-base build",
+		"watch": "webpack --watch ",
+		"build": "webpack"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@babel/node": "^7.4.5",
+		"@babel/plugin-syntax-dynamic-import": "^7.2.0",
+		"@babel/preset-env": "^7.4.5",
+		"@babel/preset-react": "^7.0.0",
+		"babel-eslint": "^10.0.2",
+		"babel-loader": "^8.0.6",
+		"css-loader": "^3.0.0",
+		"eslint-plugin-react": "^7.14.2",
+		"file-loader": "^4.2.0",
+		"html-webpack-plugin": "^3.2.0",
+		"image-webpack-loader": "^5.0.0",
+		"node-sass": "^4.12.0",
+		"path": "^0.12.7",
+		"sass-loader": "^7.1.0",
+		"style-loader": "^0.23.1",
+		"url-loader": "^2.1.0",
+		"webpack": "^4.35.2",
+		"webpack-cli": "^3.3.5",
+		"webpack-dev-server": "^3.7.2"
+	},
+	"dependencies": {
+		"eslint": "^6.0.1",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"react-loadable": "^5.5.0",
+		"react-redux": "^7.1.0",
+		"react-router": "^5.0.1",
+		"react-router-dom": "^5.0.1",
+		"redux": "^4.0.1",
+		"redux-logger": "^3.0.6",
+		"redux-thunk": "^2.3.0"
+	}
+}
