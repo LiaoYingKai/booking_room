@@ -7,7 +7,6 @@ import './style.scss'
 function Layout(){
 	return (
 		<Router>
-			<LayoutHeader/>
 			<div className="home-page__content">
 				<RouteLayout/>
 			</div>
