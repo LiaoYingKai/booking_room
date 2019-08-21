@@ -5,6 +5,23 @@ import {
 } from './action-type';
 import { header, apiUrl } from '../lib/api';
 
+export function fetchRooms() {
+	return dispatch => {
+		dispatch(startFetchRooms());
+		return fetch(`${apiUrl}/rooms`,{
+			method: 'GET',
+			headers: header()
+		})
+			.then(response => response.json())
+			.then(data => {
+				dispatch(fetchRoomsSuccess(data.items));
+			})
+			.catch(error => {
+				dispatch(fetchRoomsFailed(error));
+			});
+	};
+}
+
 export function startFetchRooms() {
 	return {
 		type: START_FETCH_ROOMS,
@@ -23,21 +40,4 @@ export function fetchRoomsFailed(error) {
 		type: FETCH_ROOMS_FAILED,
 		error,
 	};
-}
-
-export function fetchRooms() {
-	return dispatch => {
-		dispatch(startFetchRooms());
-		return fetch(`${apiUrl}/rooms`,{
-			method: 'GET',
-			headers: header()
-		})
-			.then(response => response.json())
-			.then(data => {
-				dispatch(fetchRoomsSuccess(data.items));
-			})
-			.catch(error => {
-				dispatch(fetchRoomsFailed(error));
-			})
-	}
 }
