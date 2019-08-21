@@ -35,9 +35,6 @@ class RoomList extends Component {
 			</div>
 		);
 	}
-	componentDidMount() {
-		this.props.fetchRooms();
-	}
 }
 
 function mapStateToProps(state) {
@@ -45,10 +42,8 @@ function mapStateToProps(state) {
 		rooms: state.rooms.data
 	};
 }
-function mapDispatchToProps(dispatch) {
-	return  {
-		fetchRooms: () => dispatch(fetchRooms())
-	};
+function mapDispatchToProps() {
+	
 }
 
 RoomList.propTypes = propTypes;

@@ -1,17 +1,36 @@
-import React from 'react'
-import { HashRouter as Router, } from 'react-router-dom'
-import RouteLayout from './route'
-import LayoutHeader from '../components/layout-header'
-import './style.scss'
+import React, { Component, } from 'react';
+import PropTypes from 'prop-types';
+import { HashRouter as Router, } from 'react-router-dom';
+import RouteLayout from './route';
+import { connect } from 'react-redux';
+import { fetchRooms } from '../actions/rooms-actions';
+import './style.scss';
 
-function Layout(){
-	return (
-		<Router>
-			<div className="home-page__content">
-				<RouteLayout/>
-			</div>
-		</Router>
-	)
+const propTypes = {
+	fetchRooms: PropTypes.func.isRequired,
+};
+
+class Layout extends Component {
+	render() {
+		return (
+			<Router>
+				<div className="home-page__content">
+					<RouteLayout/>
+				</div>
+			</Router>
+		);
+	}
+	componentDidMount() {
+		this.props.fetchRooms();
+	}
 }
 
-export default Layout
+Layout.propTypes = propTypes;
+
+function mapDispatchToProps(dispatch) {
+	return  {
+		fetchRooms: () => dispatch(fetchRooms())
+	};
+}
+
+export default connect(null, mapDispatchToProps)(Layout);
