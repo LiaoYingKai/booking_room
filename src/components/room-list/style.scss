@@ -1,0 +1,16 @@
+.room-list{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	width: 943px;
+	margin: 0 auto;
+	position: relative;
+	top: -107px;
+	&__info{
+		width: 299px;
+		display: inline-block;
+		img{
+			width: 100%;
+		}
+	}
+}

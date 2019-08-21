@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function BannerContent() {
 	return (
@@ -11,7 +11,7 @@ function BannerContent() {
 				<div className="banner-content__info-detail"></div>
 			</div>
 		</div>
-	)
+	);
 }
 
-export default BannerContent
+export default BannerContent;
