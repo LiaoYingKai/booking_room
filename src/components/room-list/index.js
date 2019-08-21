@@ -25,8 +25,9 @@ class RoomList extends Component {
 					rooms.map(item => (
 						<Link className="room-list__info" key={item.id} to={`rooms/${item.id}`}>
 							<img src={item.imageUrl}></img>
-							<div>
-								{item.name}
+							<div className="room-list__info-title">
+								<p>{item.name}</p>
+								<p className="room-list__info-detail"> <span>NT.{item.normalDayPrice}</span> 平日 NT.{item.holidayPrice}假日  </p>
 							</div>
 						</Link>
 					))
