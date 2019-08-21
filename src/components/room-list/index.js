@@ -1,12 +1,24 @@
-import React, { Component, } from 'react'
-import './style.scss'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { fetchRooms } from '../../actions/rooms-actions'
+import React, { Component, } from 'react';
+import PropTypes from 'prop-types';
+import './style.scss';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchRooms } from '../../actions/rooms-actions';
 
-class RoomList extends Component{
-	render(){
-		const { rooms } = this.props
+const propTypes = {
+	rooms: PropTypes.array,
+	fetchRooms: PropTypes.func,
+};
+
+const defatulProps = {
+	rooms: [],
+	fetchRooms: () => {},
+};
+
+class RoomList extends Component {
+	render() {
+		const { rooms } = this.props;
+
 		return (
 			<div className="room-list">
 				{
@@ -20,23 +32,25 @@ class RoomList extends Component{
 					))
 				}
 			</div>
-		)
+		);
 	}
-	componentDidMount(){
-		this.props.fetchRooms()
+	componentDidMount() {
+		this.props.fetchRooms();
 	}
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
 	return {
 		rooms: state.rooms.data
-	}
+	};
 }
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
 	return  {
 		fetchRooms: () => dispatch(fetchRooms())
-	}
+	};
 }
 
+RoomList.propTypes = propTypes;
+RoomList.defatulProps = defatulProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomList)
+export default connect(mapStateToProps, mapDispatchToProps)(RoomList);
