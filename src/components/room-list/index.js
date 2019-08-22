@@ -23,7 +23,7 @@ class RoomList extends Component {
 			<div className="room-list">
 				{
 					rooms.map(item => (
-						<Link className="room-list__info" key={item.id} to={`rooms/${item.id}`}>
+						<Link className="room-list__info" key={item.id} to={`room/${item.id}`}>
 							<img src={item.imageUrl}></img>
 							<div className="room-list__info-title">
 								<p>{item.name}</p>
@@ -42,11 +42,8 @@ function mapStateToProps(state) {
 		rooms: state.rooms.data
 	};
 }
-function mapDispatchToProps() {
-	
-}
 
 RoomList.propTypes = propTypes;
 RoomList.defatulProps = defatulProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomList);
+export default connect(mapStateToProps)(RoomList);
