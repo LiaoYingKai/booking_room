@@ -13,7 +13,8 @@ const {
 } = LoadingStatusEnums;
 
 const initState = {
-	data: {},
+	booking:[],
+	room: {},
 	loadingStatus: NONE,
 	errorMessage: ''
 };
@@ -21,26 +22,20 @@ const initState = {
 export default function roomList(state = initState, action) {
 	switch (action.type) {
 		case START_FETCH_ROOM_INFO: {
-			return {
-				data: {},
-				loadingStatus: LOADING,
-				errorMessage: ''
-			};
+			return Object.assign({}, initState, { loadingStatus: LOADING, });
 		}
 		case FETCH_ROOM_INFO_SUCCESS: {
-			console.log("tets")
+			const { booking, room } = action.room;
+
 			return {
-				data: action.room ,
+				booking,
+				room,
 				loadingStatus: SUCCESS,
 				errorMessage: '',
 			};
 		}
 		case FETCH_ROOM_INFO_FAILED: {
-			return {
-				data: state,
-				loadingStatus: FAILED,
-				errorMessage: action.error,
-			};
+			return Object.assign({}, initState, { loadingStatus: FAILED, errorMessage: action.error });
 		}
 		default: {
 			return state;
