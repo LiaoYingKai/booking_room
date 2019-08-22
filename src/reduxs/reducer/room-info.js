@@ -1,6 +1,7 @@
 import {
 	FETCH_ROOM_INFO_SUCCESS,
 	FETCH_ROOM_INFO_FAILED,
+	START_FETCH_ROOM_INFO,
 } from '../../actions/action-type';
 import { LoadingStatusEnums } from '../../lib/LoadingStatusEnums';
 
@@ -19,9 +20,17 @@ const initState = {
 
 export default function roomList(state = initState, action) {
 	switch (action.type) {
-		case FETCH_ROOM_INFO_SUCCESS: {
+		case START_FETCH_ROOM_INFO: {
 			return {
-				data: Object.assign({},state.data,{ [action.room.id]: action.room }),
+				data: {},
+				loadingStatus: LOADING,
+				errorMessage: ''
+			};
+		}
+		case FETCH_ROOM_INFO_SUCCESS: {
+			console.log("tets")
+			return {
+				data: action.room ,
 				loadingStatus: SUCCESS,
 				errorMessage: '',
 			};
