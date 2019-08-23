@@ -2,13 +2,14 @@ import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; 
 import { fetchRoomInfo } from '../../actions/room-info-actions';
+import RoomDetails from '../../components/room-details';
 
 class Room extends Component {
 
 	render() {
 		return (
 			<div>
-				Hello world
+				<RoomDetails/>
 			</div>
 		);
 	}
