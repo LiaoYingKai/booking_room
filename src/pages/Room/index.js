@@ -5,6 +5,7 @@ import { fetchRoomInfo } from '../../actions/room-info-actions';
 import RoomDetails from '../../components/room-details';
 import RoomInfoBanner from '../../components/room-info-banner';
 import BookingCalendar from '../../components/booking-calendar';
+import Modal from '../../components/modal';
 import './style.scss';
 
 const propTypes = {
@@ -54,6 +55,7 @@ class Room extends Component {
 						<BookingCalendar/>
 					</div>
 				</div>
+				<Modal></Modal>
 			</div>
 		);
 	}

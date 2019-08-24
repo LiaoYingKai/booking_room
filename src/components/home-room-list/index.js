@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './style.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchRooms } from '../../actions/rooms-actions';
 
 const propTypes = {
 	rooms: PropTypes.array,
@@ -12,7 +11,6 @@ const propTypes = {
 
 const defatulProps = {
 	rooms: [],
-	fetchRooms: () => {},
 };
 
 class RoomList extends Component {
