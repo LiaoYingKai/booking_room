@@ -9,7 +9,7 @@ class Room extends Component {
 	render() {
 		return (
 			<div>
-				<RoomDetails/>
+				<RoomDetails room={this.props.room}/>
 			</div>
 		);
 	}
@@ -23,7 +23,8 @@ class Room extends Component {
 
 function mapStateToProps(state) {
 	return {
-		room: state.roomInfo.data
+		booking: state.roomInfo.booking,
+		room: state.roomInfo.room[0],
 	};
 }
 function mapDispatchToProps(dispatch) {

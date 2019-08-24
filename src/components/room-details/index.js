@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WifiSvg from '../../icon/wifi.svg';
+import WiFiSvg from '../../icon/wiFi.svg';
 import BreezeSvg from '../../icon/breeze.svg';
 import BreakfastSvg from '../../icon/breakfast.svg';
 import MountainRangeSvg from '../../icon/mountain-range.svg';
@@ -11,17 +11,19 @@ import RoomServiceSvg from '../../icon/room_service.svg';
 import SmokeFreeSvg from '../../icon/no-smoke-symbol.svg';
 import SofaSvg from '../../icon/dog.svg';
 import TelevisionSvg from '../../icon/phone.svg';
-import ChildFriendlySvg from '../../crawling-baby-silhouette.svg';
+import ChildFriendlySvg from '../../icon/crawling-baby-silhouette.svg';
 import { Icon } from 'antd';
+import cx from 'classnames';
+import './style.scss';
 
 const iconContrast = {
 	'Air-Conditioner': {
 		component: BreezeSvg,
 		name: '空調',
 	},
-	'Wi-fi': {
-		component: WifiSvg,
-		name: 'Wi-fi',
+	'Wi-Fi': {
+		component: WiFiSvg,
+		name: 'Wi-Fi',
 	},
 	'Breakfast': {
 		component: BreakfastSvg,
@@ -65,9 +67,21 @@ const iconContrast = {
 	},
 };
 
-function RoomDetails({ amenities }) {
+function RoomDetails({ room }) {
+
 	return (
-		<Icon component={WifiSvg}></Icon>
+		<div className="room-details">
+			{
+				room ? 
+					Object.keys(room.amenities).map(item => (
+						<div key={item} className={cx({ 'room-details--disabled': !room.amenities[item] })}>
+							<Icon component={iconContrast[item].component} width={'20px'} hieght={'20px'}></Icon>
+							<span>{iconContrast[item].name}</span>
+						</div> 
+					)) : null
+			}
+		</div>
+		
 	);
 }
 
