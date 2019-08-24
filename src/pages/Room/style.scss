@@ -1,0 +1,46 @@
+.room {
+	&-content{
+		width: 1200px;
+		margin: 0 auto;
+		padding: 47px 62px;
+		box-sizing: border-box;
+		display: flex;
+		justify-content: space-between;
+		&__info{
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			margin-right: 37px;
+			&-details{
+
+			}
+			&-price{
+				text-align: right;
+				p{
+					line-height: 27px;
+					color: #000000;
+					&:nth-child(2),
+					&:nth-child(4){
+						font-size: 14px;
+						color: #6D7278;
+						letter-spacing: 1.46px;
+						line-height: 27px;
+					}
+					&:nth-child(1){
+						font-size: 30px;
+						letter-spacing: 3.13px;
+					}
+					&:nth-child(3){
+						font-size: 16px;
+						letter-spacing: 1.67px;
+					}
+				}
+			}
+		}
+		&__calendar{
+			width: 383px;
+			height: 10px;
+			background-color: red;
+		}
+	}
+}	
