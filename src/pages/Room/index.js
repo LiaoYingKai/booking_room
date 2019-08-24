@@ -29,7 +29,7 @@ class Room extends Component {
 					<div className="room-content__info">
 						<div className="room-content__info-details">
 							<p className="room-content__info-details-title">{name}</p>
-							<p>房客人數限制： {GuestMax}~{GuestMin} 人</p>
+							<p>房客人數限制： {GuestMin}~{GuestMax} 人</p>
 							<p>床型：{Bed[0]}</p>
 							<p>衛浴數量： {descriptionShort['Private-Bath']} 間</p>
 							<p>房間大小： {Footage} 平方公尺</p>
