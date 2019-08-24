@@ -4,8 +4,13 @@ import { connect } from 'react-redux';
 import { fetchRoomInfo } from '../../actions/room-info-actions';
 import RoomDetails from '../../components/room-details';
 
-class Room extends Component {
+const propTypes = {
+	room: PropTypes.object,
+	fetchRoomInfo: PropTypes.func,
+	match: PropTypes.object,
+};
 
+class Room extends Component {
 	render() {
 		return (
 			<div>
@@ -32,5 +37,7 @@ function mapDispatchToProps(dispatch) {
 		fetchRoomInfo: (id) => dispatch(fetchRoomInfo(id))
 	};
 }
+
+Room.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Room);

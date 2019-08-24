@@ -15,6 +15,7 @@ import ChildFriendlySvg from '../../icon/crawling-baby-silhouette.svg';
 import { Icon } from 'antd';
 import cx from 'classnames';
 import './style.scss';
+import Room from '../../pages/Room';
 
 const iconContrast = {
 	'Air-Conditioner': {
@@ -67,8 +68,11 @@ const iconContrast = {
 	},
 };
 
-function RoomDetails({ room }) {
+const propTypes = {
+	room: PropTypes.object,
+};
 
+function RoomDetails({ room }) {
 	return (
 		<div className="room-details">
 			{
@@ -84,5 +88,7 @@ function RoomDetails({ room }) {
 		
 	);
 }
+
+RoomDetails.propTypes = propTypes;
 
 export default RoomDetails;
