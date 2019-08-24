@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { fetchRoomInfo } from '../../actions/room-info-actions';
 import RoomDetails from '../../components/room-details';
 import RoomInfoBanner from '../../components/room-info-banner';
+import BookingCalendar from '../../components/booking-calendar';
 import './style.scss';
+
 const propTypes = {
 	room: PropTypes.object,
 	fetchRoomInfo: PropTypes.func,
@@ -48,9 +50,9 @@ class Room extends Component {
 							<p>假日(五~日)</p>
 						</div>
 					</div>
-					<div className="room-content__calendar"></div>
-
-
+					<div className="room-content__calendar">
+						<BookingCalendar/>
+					</div>
 				</div>
 			</div>
 		);

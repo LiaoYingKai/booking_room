@@ -1,13 +1,12 @@
 .room {
 	&-content{
-		width: 1200px;
+		max-width: 1200px;
 		margin: 0 auto;
 		padding: 47px 62px;
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
 		&__info{
-			width: 100%;
 			display: flex;
 			justify-content: space-between;
 			margin-right: 37px;
@@ -64,8 +63,6 @@
 		}
 		&__calendar{
 			width: 383px;
-			height: 10px;
-			background-color: red;
 		}
 	}
 }	
