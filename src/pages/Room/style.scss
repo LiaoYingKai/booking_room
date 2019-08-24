@@ -12,7 +12,32 @@
 			justify-content: space-between;
 			margin-right: 37px;
 			&-details{
-
+				width: 482px;
+				p{
+					font-size: 14px;
+					color: #000000;
+					letter-spacing: 1.46px;
+					line-height: 31px;
+					margin-bottom: 6px;
+				}
+				.room-content__info-details-title{
+					font-size: 36px;
+					margin-bottom: 30px;
+				}
+				.room-content__info-details-description{
+					font-size: 12px;
+					line-height: 20px;
+				}
+				.room-content__info-details-time{
+					display: flex;
+					p{
+						margin-right: 96px;
+						span{
+							font-size: 21px;
+							letter-spacing: 2.19px;
+						}
+					}
+				}
 			}
 			&-price{
 				text-align: right;

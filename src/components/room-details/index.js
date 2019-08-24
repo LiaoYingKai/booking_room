@@ -69,11 +69,12 @@ const iconContrast = {
 
 const propTypes = {
 	amenities: PropTypes.object,
+	style: PropTypes.object,
 };
 
-function RoomDetails({ amenities }) {
+function RoomDetails({ amenities, style }) {
 	return (
-		<div className="room-details">
+		<div className="room-details" style={style}>
 			{
 				amenities ? 
 					Object.keys(amenities).map(item => (
