@@ -15,7 +15,6 @@ import ChildFriendlySvg from '../../icon/crawling-baby-silhouette.svg';
 import { Icon } from 'antd';
 import cx from 'classnames';
 import './style.scss';
-import Room from '../../pages/Room';
 
 const iconContrast = {
 	'Air-Conditioner': {
@@ -69,16 +68,16 @@ const iconContrast = {
 };
 
 const propTypes = {
-	room: PropTypes.object,
+	amenities: PropTypes.object,
 };
 
-function RoomDetails({ room }) {
+function RoomDetails({ amenities }) {
 	return (
 		<div className="room-details">
 			{
-				room ? 
-					Object.keys(room.amenities).map(item => (
-						<div key={item} className={cx({ 'room-details--disabled': !room.amenities[item] })}>
+				amenities ? 
+					Object.keys(amenities).map(item => (
+						<div key={item} className={cx({ 'room-details--disabled': !amenities[item] })}>
 							<Icon component={iconContrast[item].component} width={'20px'} hieght={'20px'}></Icon>
 							<span>{iconContrast[item].name}</span>
 						</div> 

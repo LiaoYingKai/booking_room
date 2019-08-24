@@ -1,6 +1,6 @@
 import React, { Component, } from 'react';
 import Banner from '../../components/home-banner';
-import RoomList from '../../components/room-list';
+import RoomList from '../../components/home-room-list';
 import './style.scss';
 
 class Home extends Component {

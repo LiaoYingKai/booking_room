@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; 
 import { fetchRoomInfo } from '../../actions/room-info-actions';
 import RoomDetails from '../../components/room-details';
+import RoomInfoBanner from '../../components/room-info-banner';
 
 const propTypes = {
 	room: PropTypes.object,
@@ -10,11 +11,19 @@ const propTypes = {
 	match: PropTypes.object,
 };
 
+const defaultProps = {
+	room: {},
+};
+
 class Room extends Component {
 	render() {
+		const { room } = this.props;
+		const { amenities = {}, imageUrl = [] } =  room;
+
 		return (
 			<div>
-				<RoomDetails room={this.props.room}/>
+				<RoomInfoBanner imageUrl={imageUrl}/>
+				<RoomDetails amenities={amenities}/>
 			</div>
 		);
 	}
@@ -39,5 +48,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 Room.propTypes = propTypes;
+Room.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Room);

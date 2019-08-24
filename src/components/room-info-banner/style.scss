@@ -1,0 +1,18 @@
+.room-info-banner{
+	height: 65vh;
+	position: relative;
+	img{
+		width: 100%;
+		height: 100%;
+		object-fit: fill;
+	}
+	&__logo{
+		svg {
+			position: absolute;
+			top: 40px;
+			left: 32px;
+			width: 150px;
+			height: 40px;
+		}
+	}
+}
