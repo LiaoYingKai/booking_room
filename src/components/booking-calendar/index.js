@@ -1,5 +1,7 @@
 import React, { Component, } from 'react';
 import { Calendar, Icon } from 'antd';
+import Modal from '../../components/modal';
+import SuccessfulSvg from '../../icon/tick-inside-circle.svg';
 import './style.scss';
 import 'antd/dist/antd.css';
 
@@ -7,8 +9,17 @@ import 'antd/dist/antd.css';
 class BookingCalendar extends Component {
 	constructor() {
 		super();
+		this.state = {
+			isBookingModalVisible: false,
+		};
 		this._renderDateCell = this._renderDateCell.bind(this);
 		this._renderTitle = this._renderTitle.bind(this);
+		this._handleToggleBookingModal = this._handleToggleBookingModal.bind(this);
+	}
+	_handleToggleBookingModal() {
+		this.setState({
+			isBookingModalVisible: !this.state.isBookingModalVisible
+		});
 	}
 	_renderDateCell(value) {
 		const today = new Date();
@@ -51,7 +62,8 @@ class BookingCalendar extends Component {
 		);
 	}
 	render() {
-		const { _renderDateCell, _renderTitle } = this;
+		const { _renderDateCell, _renderTitle, _handleToggleBookingModal } = this;
+		const { isBookingModalVisible } = this.state;
 
 		return (
 			<div className="booking-calendar">
@@ -62,7 +74,32 @@ class BookingCalendar extends Component {
 						headerRender={_renderTitle}
 					/>
 				</div>
-				<button>預約時段</button>
+				<button onClick={_handleToggleBookingModal}>預約時段</button>
+				<Modal
+					title={"預約時段"}
+					isOpen={isBookingModalVisible}
+					hasCancelButton={true}
+					buttonText={"確定預約"}
+					onClickCancel={_handleToggleBookingModal}
+					onClickOK={_handleToggleBookingModal}
+				>
+				</Modal>
+				<Modal
+					title={"預約成功"}
+					isOpen={false}
+					buttonText={"確定預約"}
+					onClickOK={_handleToggleBookingModal}
+				>
+					<Icon component={SuccessfulSvg}/>
+				</Modal>
+				<Modal
+					title={"預約失敗"}
+					isOpen={false}
+					buttonText={"返回"}
+					onClickOK={_handleToggleBookingModal}
+				>
+					預約時間已被人預訂
+				</Modal>
 			</div>
 
 		);
