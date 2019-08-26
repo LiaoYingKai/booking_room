@@ -1,11 +1,13 @@
 import React, { Component, } from 'react';
-import { Calendar, Icon } from 'antd';
+import { Calendar, Icon, Input, DatePicker,  } from 'antd';
 import Modal from '../../components/modal';
 import SuccessfulSvg from '../../icon/tick-inside-circle.svg';
 import './style.scss';
 import 'antd/dist/antd.css';
+import { connect } from 'react-redux';
+const { RangePicker } = DatePicker;
 
-// TODO 要實作： 預約時段跳出 pop up， 選擇月份， disabled 已經被選的日期
+// TODO 要實作： 選擇月份 預約時間 預約成功或失敗的彈跳視窗
 class BookingCalendar extends Component {
 	constructor() {
 		super();
@@ -22,8 +24,11 @@ class BookingCalendar extends Component {
 		});
 	}
 	_renderDateCell(value) {
+		const { booking } = this.props;
 		const today = new Date();
-		
+
+		if (!booking) return;
+
 		if (value.month() < (today.getMonth())) {
 			return (
 				<div className="date over-date">
@@ -39,13 +44,21 @@ class BookingCalendar extends Component {
 				</div>
 			);
 		}
-		if (value.date() === 26 || value.date() === 27) {
+		const isBookingDate = booking.map(item => {
+			const date = new Date(item.date);
+
+			return `${date.getMonth() + 1}-${date.getDate()}`;
+		})
+			.includes(`${value.month() + 1}-${value.date()}`);
+
+		if (isBookingDate) {
 			return (
 				<div className="date booking-date">
 					{value.date()}
 				</div>
 			);
 		}
+
 		return (
 			<div className="date">
 				{value.date()}
@@ -64,7 +77,7 @@ class BookingCalendar extends Component {
 	render() {
 		const { _renderDateCell, _renderTitle, _handleToggleBookingModal } = this;
 		const { isBookingModalVisible } = this.state;
-
+		
 		return (
 			<div className="booking-calendar">
 				<div className="booking-calendar--style">
@@ -83,6 +96,21 @@ class BookingCalendar extends Component {
 					onClickCancel={_handleToggleBookingModal}
 					onClickOK={_handleToggleBookingModal}
 				>
+					<div>
+						姓名 <Input></Input>
+					</div>
+					<div>
+						電話 <Input></Input>
+					</div>
+					<div>
+						時間
+						<RangePicker></RangePicker>
+					</div>
+					<div>
+						
+					</div>
+					<div>
+					</div>
 				</Modal>
 				<Modal
 					title={"預約成功"}
@@ -101,9 +129,14 @@ class BookingCalendar extends Component {
 					預約時間已被人預訂
 				</Modal>
 			</div>
-
 		);
 	}
 }
 
-export default BookingCalendar;
+function mapStateToProps(state) {
+	return {
+		booking: state.roomInfo.booking,
+	};
+}
+
+export default connect(mapStateToProps)(BookingCalendar);
