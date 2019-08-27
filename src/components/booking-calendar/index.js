@@ -53,13 +53,22 @@ class BookingCalendar extends Component {
 		});
 	}
 	_handleChangeDate(moment) {
-		// 處理 moment
 		const bookingInfo = Object.assign({}, this.state.bookingInfo);
-		console.log(moment)
-		// bookingInfo.date = [];
-		// this.setState({
-		// 	bookingInfo
-		// });
+		const dateArray = [];
+
+		let startDay = moment[0];
+
+		let endDay = moment[1];
+
+		do { 
+			dateArray.push(startDay.format("YYYY-MM-DD"));
+			startDay = startDay.add(1, 'day');
+		} while (!startDay.isSame(endDay));
+		bookingInfo.date = dateArray;
+
+		this.setState({
+			bookingInfo
+		});
 	}
 	_handleToggleBookingModal() {
 		this.setState({
@@ -126,7 +135,6 @@ class BookingCalendar extends Component {
 		function changeMonth(valueClone, nextMonth) {
 			valueClone.month(nextMonth);
 			onChange(valueClone);
-			// onChange(month);
 		}
 
 		return (
