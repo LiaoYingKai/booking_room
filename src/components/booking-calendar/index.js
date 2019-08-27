@@ -1,13 +1,21 @@
 import React, { Component, } from 'react';
+import PropTypes from 'prop-types';
 import { Calendar, Icon, Input, DatePicker,  } from 'antd';
 import Modal from '../../components/modal';
 import SuccessfulSvg from '../../icon/tick-inside-circle.svg';
 import './style.scss';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
-const { RangePicker } = DatePicker;
 
-// TODO 要實作： 選擇月份 預約時間 預約成功或失敗的彈跳視窗
+const { RangePicker } = DatePicker;
+const propTypes = {
+	booking: PropTypes.array,
+};
+const defaultProps = { 
+	booking: [],
+};
+
+// TODO 要實作：預約時間 預約成功或失敗的彈跳視窗
 class BookingCalendar extends Component {
 	constructor() {
 		super();
@@ -25,6 +33,7 @@ class BookingCalendar extends Component {
 	}
 	_renderDateCell(value) {
 		const { booking } = this.props;
+		const { _handleToggleBookingModal } = this;
 		const today = new Date();
 
 		if (!booking) return;
@@ -60,17 +69,23 @@ class BookingCalendar extends Component {
 		}
 
 		return (
-			<div className="date">
+			<div className="date" onClick={_handleToggleBookingModal}>
 				{value.date()}
 			</div>
 		);
 	}
-	_renderTitle({ value, type, onChange, onTypeChange }) {
+	_renderTitle({ value, onChange, }) {
+		function changeMonth(valueClone, nextMonth) {
+			valueClone.month(nextMonth);
+			onChange(valueClone);
+			// onChange(month);
+		}
+
 		return (
 			<div className="booking-calendar__title">
-				<Icon type="left" />
+				<Icon type="left" onClick={() => { changeMonth(value.clone(), value.month() - 1); }}/>
 				{value.year()} / {value.month() + 1}
-				<Icon type="right" />
+				<Icon type="right" onClick={() => { changeMonth(value.clone(), value.month() + 1); }}/>
 			</div>
 		);
 	}
@@ -132,6 +147,9 @@ class BookingCalendar extends Component {
 		);
 	}
 }
+
+BookingCalendar.propTypes = propTypes;
+BookingCalendar.defaultProps = defaultProps;
 
 function mapStateToProps(state) {
 	return {

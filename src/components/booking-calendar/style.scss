@@ -4,7 +4,7 @@
 		box-shadow: 0 2px 10px 0;
 	}
 	&__title{
-		padding: 30px 42px;
+		padding: 30px 42px 20px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -39,5 +39,10 @@
 		padding: 14px 24px;
 		margin-top: 26px;
 		cursor: pointer;
+	}
+}
+.ant-calendar-picker{
+	i {
+		display: none;
 	}
 }
