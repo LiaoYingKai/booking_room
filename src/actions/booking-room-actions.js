@@ -8,12 +8,13 @@ import { header, apiUrl } from '../lib/api';
 
 
 export function bookingRoom(id, bookingInfo) {
+	
 	return dispatch => {
 		dispatch(startBookingRoom());
 		return fetch(`${apiUrl}/room/${id}`,{
-			type: 'POST',
+			method: 'POST',
 			headers: header(),
-			body: bookingInfo
+			body: JSON.stringify(bookingInfo)
 		})
 			.then(response => response.json())
 			.then(data => {

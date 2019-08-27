@@ -6,6 +6,7 @@ import SuccessfulSvg from '../../icon/tick-inside-circle.svg';
 import './style.scss';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
+import { bookingRoom } from '../../actions/booking-room-actions';
 
 const { RangePicker } = DatePicker;
 const propTypes = {
@@ -76,7 +77,10 @@ class BookingCalendar extends Component {
 		});
 	}
 	_handleSubmit() {
-		console.log(this.state.bookingInfo);
+		const { id, bookingRoom, } = this.props;
+		const { bookingInfo } = this.state;
+		
+		bookingRoom(id, bookingInfo);
 	}
 	_handleCancel() {
 		this._handleToggleBookingModal();
@@ -223,5 +227,10 @@ function mapStateToProps(state) {
 		booking: state.roomInfo.booking,
 	};
 }
+function mapDispatchToProps(dispatch) {
+	return {
+		bookingRoom: (id, bookingInfo) => dispatch(bookingRoom(id, bookingInfo)),
+	};
+}
 
-export default connect(mapStateToProps)(BookingCalendar);
+export default connect(mapStateToProps, mapDispatchToProps)(BookingCalendar);

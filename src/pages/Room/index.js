@@ -24,6 +24,7 @@ class Room extends Component {
 		const { amenities = {}, imageUrl = [], holidayPrice, normalDayPrice, name, description, checkInAndOut = {}, descriptionShort = {} } =  room;
 		const { checkInEarly, checkInLate, checkOut } = checkInAndOut;
 		const { Footage, GuestMax, GuestMin, Bed = [] } = descriptionShort;
+		const { id } = this.props.match.params;
 
 		return (
 			<div className="room">
@@ -52,7 +53,7 @@ class Room extends Component {
 						</div>
 					</div>
 					<div className="room-content__calendar">
-						<BookingCalendar/>
+						<BookingCalendar id={id}/>
 					</div>
 				</div>
 				<Modal></Modal>
