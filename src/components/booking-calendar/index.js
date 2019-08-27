@@ -21,14 +21,62 @@ class BookingCalendar extends Component {
 		super();
 		this.state = {
 			isBookingModalVisible: true,
+			bookingInfo: {
+				name: '',
+				tel: '',
+				date: [],
+			},
 		};
 		this._renderDateCell = this._renderDateCell.bind(this);
 		this._renderTitle = this._renderTitle.bind(this);
 		this._handleToggleBookingModal = this._handleToggleBookingModal.bind(this);
+		this._handleChangeName = this._handleChangeName.bind(this);
+		this._handleChangeTel = this._handleChangeTel.bind(this);
+		this._handleChangeDate = this._handleChangeDate.bind(this);
+		this._handleSubmit = this._handleSubmit.bind(this);
+		this._handleCancel = this._handleCancel.bind(this);
+	}
+	_handleChangeName(value) {
+		const bookingInfo = Object.assign({}, this.state.bookingInfo);
+
+		bookingInfo.name = value;
+		this.setState({
+			bookingInfo
+		});
+	}
+	_handleChangeTel(value) {
+		const bookingInfo = Object.assign({}, this.state.bookingInfo);
+
+		bookingInfo.tel = value;
+		this.setState({
+			bookingInfo
+		});
+	}
+	_handleChangeDate(moment) {
+		// 處理 moment
+		const bookingInfo = Object.assign({}, this.state.bookingInfo);
+		console.log(moment)
+		// bookingInfo.date = [];
+		// this.setState({
+		// 	bookingInfo
+		// });
 	}
 	_handleToggleBookingModal() {
 		this.setState({
 			isBookingModalVisible: !this.state.isBookingModalVisible
+		});
+	}
+	_handleSubmit() {
+		console.log(this.state.bookingInfo);
+	}
+	_handleCancel() {
+		this._handleToggleBookingModal();
+		this.setState({
+			bookingInfo: {
+				name: '',
+				tel: '',
+				date: [],
+			},
 		});
 	}
 	_renderDateCell(value) {
@@ -90,8 +138,17 @@ class BookingCalendar extends Component {
 		);
 	}
 	render() {
-		const { _renderDateCell, _renderTitle, _handleToggleBookingModal } = this;
-		const { isBookingModalVisible } = this.state;
+		const { _renderDateCell,
+			_renderTitle,
+			_handleToggleBookingModal,
+			_handleChangeName,
+			_handleChangeTel,
+			_handleChangeDate,
+			_handleSubmit,
+			_handleCancel,
+		} = this;
+		const { isBookingModalVisible, bookingInfo, } = this.state;
+		const { name, tel, } = bookingInfo;
 		
 		return (
 			<div className="booking-calendar">
@@ -108,18 +165,18 @@ class BookingCalendar extends Component {
 					isOpen={isBookingModalVisible}
 					hasCancelButton={true}
 					buttonText={"確定預約"}
-					onClickCancel={_handleToggleBookingModal}
-					onClickOK={_handleToggleBookingModal}
+					onClickCancel={_handleCancel}
+					onClickOK={_handleSubmit}
 					className={"booking"}
 				>
 					<div className="booking__name">
-						姓名 <Input></Input>
+						姓名 <Input value={name} onChange={(event) => {_handleChangeName(event.target.value); }}></Input>
 					</div>
 					<div className="booking__phone">
-						電話 <Input></Input>
+						電話 <Input value={tel} onChange={(event) => { _handleChangeTel(event.target.value); }}></Input>
 					</div>
 					<div className="booking__time">
-						預約起迄 <RangePicker></RangePicker>
+						預約起迄 <RangePicker onChange={(value) => { _handleChangeDate(value); }}></RangePicker>
 					</div>
 					<div className="booking__detail">
 						<div>平日時段<span> 1夜</span></div>
