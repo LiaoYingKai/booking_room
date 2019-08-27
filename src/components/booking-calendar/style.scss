@@ -41,8 +41,62 @@
 		cursor: pointer;
 	}
 }
-.ant-calendar-picker{
-	i {
-		display: none;
+.booking{
+	&__name,
+	&__phone{
+		margin-bottom: 15px; 
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		input{
+			width: 243px;
+		}
+	}
+	&__time{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 30px;
+		.ant-calendar-picker{
+			width: 243px;
+			i {
+				display: none;
+			}
+		}
+	}
+	&__detail{
+		padding: 18px 0;
+		background-color: #EDEDED;
+		position: relative;
+		margin-bottom: 8px;
+		&:before,
+		&:after{
+			content: '';
+			display: inline-block;
+			position: absolute;
+			top: 0;
+			width: 42px;
+			height: 72px;
+			background-color: #EDEDED;
+		}
+		&:before{
+			left: -42px;
+		}
+		&:after{
+			right: -42px;
+		}
+		div{
+			display: flex;
+			justify-content: space-between;
+			font-size: 12px;
+			color: #6D7278;
+			letter-spacing: 1.25px;
+		}
+	}
+	&__total{
+		font-size: 26px;
+		color: #FF5C5C;
+		letter-spacing: 2.72px;
+		text-align: right;
 	}
 }

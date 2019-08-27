@@ -15,6 +15,7 @@ const propTypes = {
 	isOpen: PropTypes.bool,
 	onClickOK: PropTypes.func,
 	onClickCancel: PropTypes.func,
+	className: PropTypes.string,
 };
 
 const defaultProps = {
@@ -27,7 +28,7 @@ const defaultProps = {
 	onClickCancel: () => {},
 };
 
-function Modal({ title, buttonText, hasCancelButton, children, isOpen, onClickCancel, onClickOK, }) {
+function Modal({ title, buttonText, hasCancelButton, children, isOpen, onClickCancel, onClickOK, className }) {
 	return (
 		<div className={cx("modal", { 'modal-open': isOpen })} >
 			<div className="modal-content">
@@ -37,7 +38,7 @@ function Modal({ title, buttonText, hasCancelButton, children, isOpen, onClickCa
 				<div className="modal-content__separate">
 					\ \ \ 
 				</div>
-				<div className="modal-content__children">
+				<div className={cx("modal-content__children", className)} >
 					{children}
 				</div>
 				<div className="modal-content__button-group">

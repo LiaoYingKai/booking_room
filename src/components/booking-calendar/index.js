@@ -20,7 +20,7 @@ class BookingCalendar extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isBookingModalVisible: false,
+			isBookingModalVisible: true,
 		};
 		this._renderDateCell = this._renderDateCell.bind(this);
 		this._renderTitle = this._renderTitle.bind(this);
@@ -110,21 +110,23 @@ class BookingCalendar extends Component {
 					buttonText={"確定預約"}
 					onClickCancel={_handleToggleBookingModal}
 					onClickOK={_handleToggleBookingModal}
+					className={"booking"}
 				>
-					<div>
+					<div className="booking__name">
 						姓名 <Input></Input>
 					</div>
-					<div>
+					<div className="booking__phone">
 						電話 <Input></Input>
 					</div>
-					<div>
-						時間
-						<RangePicker></RangePicker>
+					<div className="booking__time">
+						預約起迄 <RangePicker></RangePicker>
 					</div>
-					<div>
-						
+					<div className="booking__detail">
+						<div>平日時段<span> 1夜</span></div>
+						<div>假日時段<span> 1夜</span></div>
 					</div>
-					<div>
+					<div className="booking__total">
+						&#61; NT.1234
 					</div>
 				</Modal>
 				<Modal
