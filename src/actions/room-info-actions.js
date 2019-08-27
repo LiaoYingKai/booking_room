@@ -2,6 +2,7 @@ import {
 	START_FETCH_ROOM_INFO,
 	FETCH_ROOM_INFO_SUCCESS,
 	FETCH_ROOM_INFO_FAILED,
+	UPDATE_ROOM_BOOK,
 } from './action-type';
 import { header, apiUrl } from '../lib/api';
 
@@ -42,3 +43,9 @@ export function fetchRoomInfoFailed(error) {
 	};
 }
 
+export function updateRoomBook(booking) {
+	return {
+		type: UPDATE_ROOM_BOOK,
+		booking,
+	};
+}

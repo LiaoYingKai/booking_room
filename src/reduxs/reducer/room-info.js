@@ -2,6 +2,7 @@ import {
 	FETCH_ROOM_INFO_SUCCESS,
 	FETCH_ROOM_INFO_FAILED,
 	START_FETCH_ROOM_INFO,
+	UPDATE_ROOM_BOOK,
 } from '../../actions/action-type';
 import { LoadingStatusEnums } from '../../lib/LoadingStatusEnums';
 
@@ -36,6 +37,9 @@ export default function roomList(state = initState, action) {
 		}
 		case FETCH_ROOM_INFO_FAILED: {
 			return Object.assign({}, initState, { loadingStatus: FAILED, errorMessage: action.error });
+		}
+		case UPDATE_ROOM_BOOK: {
+			return Object.assign({}, state, { booking: action.booking });
 		}
 		default: {
 			return state;
