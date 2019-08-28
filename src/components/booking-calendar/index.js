@@ -54,17 +54,18 @@ class BookingCalendar extends Component {
 		});
 	}
 	_handleChangeDate(moment) {
+		let startDay = moment[0].clone();
+		const endDay = moment[1].clone();
 		const bookingInfo = Object.assign({}, this.state.bookingInfo);
 		const dateArray = [];
+		
+		dateArray.push(startDay.format("YYYY-MM-DD"));
 
-		let startDay = moment[0];
-
-		let endDay = moment[1];
-
-		do { 
-			dateArray.push(startDay.format("YYYY-MM-DD"));
+		while (!startDay.isSame(endDay)) {
 			startDay = startDay.add(1, 'day');
-		} while (!startDay.isSame(endDay));
+			dateArray.push(startDay.format("YYYY-MM-DD"));
+		}
+
 		bookingInfo.date = dateArray;
 
 		this.setState({
@@ -79,7 +80,7 @@ class BookingCalendar extends Component {
 	_handleSubmit() {
 		const { id, bookingRoom, } = this.props;
 		const { bookingInfo } = this.state;
-		
+
 		bookingRoom(id, bookingInfo);
 	}
 	_handleCancel() {
