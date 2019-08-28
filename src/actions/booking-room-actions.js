@@ -19,7 +19,7 @@ export function bookingRoom(id, bookingInfo) {
 			.then(response => response.json())
 			.then(data => {
 				if (data.message) {
-					throw new Error('Network response was not ok.');
+					throw new Error(data.message);
 				}
 				dispatch(bookingRoomSuccess());
 				dispatch(updateRoomBook(data.booking));

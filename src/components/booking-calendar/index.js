@@ -22,6 +22,8 @@ class BookingCalendar extends Component {
 		super();
 		this.state = {
 			isBookingModalVisible: true,
+			isSuccessModalVisible: false,
+			isFailedModalVisible: false,
 			bookingInfo: {
 				name: '',
 				tel: '',
@@ -31,6 +33,8 @@ class BookingCalendar extends Component {
 		this._renderDateCell = this._renderDateCell.bind(this);
 		this._renderTitle = this._renderTitle.bind(this);
 		this._handleToggleBookingModal = this._handleToggleBookingModal.bind(this);
+		this._handleToggleSuccessModal = this._handleToggleSuccessModal.bind(this);
+		this._handleToggleFailedModal = this._handleToggleFailedModal.bind(this);
 		this._handleChangeName = this._handleChangeName.bind(this);
 		this._handleChangeTel = this._handleChangeTel.bind(this);
 		this._handleChangeDate = this._handleChangeDate.bind(this);
@@ -72,9 +76,19 @@ class BookingCalendar extends Component {
 			bookingInfo
 		});
 	}
+	_handleToggleSuccessModal() {
+		this.setState({
+			isSuccessModalVisible: false,
+		});
+	}
+	_handleToggleFailedModal() {
+		this.setState({
+			isFailedModalVisible: false,
+		});
+	}
 	_handleToggleBookingModal() {
 		this.setState({
-			isBookingModalVisible: !this.state.isBookingModalVisible
+			isBookingModalVisible: !this.state.isBookingModalVisible,
 		});
 	}
 	_handleSubmit() {
@@ -154,13 +168,20 @@ class BookingCalendar extends Component {
 		const { _renderDateCell,
 			_renderTitle,
 			_handleToggleBookingModal,
+			_handleToggleSuccessModal,
+			_handleToggleFailedModal,
 			_handleChangeName,
 			_handleChangeTel,
 			_handleChangeDate,
 			_handleSubmit,
 			_handleCancel,
 		} = this;
-		const { isBookingModalVisible, bookingInfo, } = this.state;
+		const { isBookingModalVisible,
+			isSuccessModalVisible,
+			isFailedModalVisible,
+			bookingInfo,
+		} = this.state;
+		const { bookingStatue } = this.props;
 		const { name, tel, } = bookingInfo;
 		
 		return (
@@ -201,22 +222,40 @@ class BookingCalendar extends Component {
 				</Modal>
 				<Modal
 					title={"預約成功"}
-					isOpen={false}
+					isOpen={isSuccessModalVisible}
 					buttonText={"確定預約"}
-					onClickOK={_handleToggleBookingModal}
+					onClickOK={_handleToggleSuccessModal}
 				>
 					<Icon component={SuccessfulSvg}/>
 				</Modal>
 				<Modal
 					title={"預約失敗"}
-					isOpen={false}
+					isOpen={isFailedModalVisible}
 					buttonText={"返回"}
-					onClickOK={_handleToggleBookingModal}
+					onClickOK={_handleToggleFailedModal}
 				>
 					預約時間已被人預訂
 				</Modal>
 			</div>
 		);
+	}
+	componentWillReceiveProps(nextProps) {
+		const { loadingStatus } = nextProps.bookingStatue;
+
+		this.setState({
+			isBookingModalVisible: false,
+		});
+
+		if (loadingStatus === 1) {
+			this.setState({
+				isSuccessModalVisible: true,
+			});
+		}
+		if (loadingStatus === 2) {
+			this.setState({
+				isFailedModalVisible: true,
+			});
+		}
 	}
 }
 
@@ -226,6 +265,7 @@ BookingCalendar.defaultProps = defaultProps;
 function mapStateToProps(state) {
 	return {
 		booking: state.roomInfo.booking,
+		bookingStatue: state.bookingRoom,
 	};
 }
 function mapDispatchToProps(dispatch) {
