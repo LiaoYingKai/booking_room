@@ -11,9 +11,16 @@ import { bookingRoom } from '../../actions/booking-room-actions';
 const { RangePicker } = DatePicker;
 const propTypes = {
 	booking: PropTypes.array,
+	id: PropTypes.string,
+	bookingStatue: PropTypes.object,
+	bookingRoom: PropTypes.func,
+	room: PropTypes.object,
 };
 const defaultProps = { 
 	booking: [],
+	bookingRoom: () => {},
+	bookingStatue: {},
+	room: {},
 };
 
 // TODO 要實作：預約時間 預約成功或失敗的彈跳視窗
@@ -21,7 +28,7 @@ class BookingCalendar extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isBookingModalVisible: true,
+			isBookingModalVisible: false,
 			isSuccessModalVisible: false,
 			isFailedModalVisible: false,
 			bookingInfo: {
@@ -29,6 +36,9 @@ class BookingCalendar extends Component {
 				tel: '',
 				date: [],
 			},
+			weekday: 0,
+			hoilday: 0,
+			totalPrice: 0,
 		};
 		this._renderDateCell = this._renderDateCell.bind(this);
 		this._renderTitle = this._renderTitle.bind(this);
@@ -62,10 +72,28 @@ class BookingCalendar extends Component {
 		const endDay = moment[1].clone();
 		const bookingInfo = Object.assign({}, this.state.bookingInfo);
 		const dateArray = [];
+		const { room } = this.props;
+		const { normalDayPrice, holidayPrice } = room;
+
+		let weekday = 0;
+
+		let hoilday = 0;
+
+		let totalPrice = 0;
 		
 		dateArray.push(startDay.format("YYYY-MM-DD"));
 
 		while (!startDay.isSame(endDay)) {
+			let dayOfweek = startDay.format('d');
+
+			if (dayOfweek == 0 || dayOfweek == 6) {
+				hoilday++;
+				totalPrice += holidayPrice;
+			} else {
+				weekday++;
+				totalPrice += normalDayPrice;
+			}
+
 			startDay = startDay.add(1, 'day');
 			dateArray.push(startDay.format("YYYY-MM-DD"));
 		}
@@ -73,8 +101,12 @@ class BookingCalendar extends Component {
 		bookingInfo.date = dateArray;
 
 		this.setState({
-			bookingInfo
+			bookingInfo,
+			weekday,
+			hoilday,
+			totalPrice
 		});
+
 	}
 	_handleToggleSuccessModal() {
 		this.setState({
@@ -180,8 +212,10 @@ class BookingCalendar extends Component {
 			isSuccessModalVisible,
 			isFailedModalVisible,
 			bookingInfo,
+			weekday,
+			hoilday,
+			totalPrice,
 		} = this.state;
-		const { bookingStatue } = this.props;
 		const { name, tel, } = bookingInfo;
 		
 		return (
@@ -213,11 +247,11 @@ class BookingCalendar extends Component {
 						預約起迄 <RangePicker onChange={(value) => { _handleChangeDate(value); }}></RangePicker>
 					</div>
 					<div className="booking__detail">
-						<div>平日時段<span> 1夜</span></div>
-						<div>假日時段<span> 1夜</span></div>
+						<div>平日時段<span> {weekday} 夜</span></div>
+						<div>假日時段<span> {hoilday} 夜</span></div>
 					</div>
 					<div className="booking__total">
-						&#61; NT.1234
+						&#61; NT.{totalPrice}
 					</div>
 				</Modal>
 				<Modal
@@ -264,6 +298,7 @@ BookingCalendar.defaultProps = defaultProps;
 
 function mapStateToProps(state) {
 	return {
+		room: state.roomInfo.room[0],
 		booking: state.roomInfo.booking,
 		bookingStatue: state.bookingRoom,
 	};
